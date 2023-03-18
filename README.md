@@ -10,10 +10,3 @@ Summer is proud of building a world-class engineering team in China, where he es
 
 Outside of work, Summer is passionate about sports, especially soccer and table tennis. He lives in the Bay Area with his wife and daughter, who is currently enrolled in a Master's program for Data Science at the University of Southern California - a source of great pride for the family. Summer is also a technical enthusiast and enjoys writing code. His GitHub account is https://github.com/summerfang.
 In addition to his love for technology, Summer is also interested in science, literature, history, politics, culture, and religion. He is currently studying machine learning technology, and believes it will usher in a new era for the next 30 years. Summer firmly believes that no product can survive without AI features in the future.
-
-<script>
-    const currentYear = new Date().getFullYear();
-    const yearsPast2000 = currentYear - 2000;
-
-    document.getElementById("yearsPast2000").textContent = yearsPast2000;
-</script>
