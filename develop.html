@@ -1,49 +1,10 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
   <title>Summer Fang</title>
-  <style>
-    /* Styles for the top bar */
-    #topbar {
-      background-image: url("beautiful_view.png");
-      background-size: cover;
-      height: 100px;
-    }
-
-    #topmenu {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      height: 40px;
-      background-color: #f1f1f1;
-    }
-
-    #topmenu a {
-      text-decoration: none;
-      color: black;
-    }
-
-    #topmenu a:hover {
-      color: white;
-      background-color: black;
-    }
-
-    /* Styles for the sections */
-    section {
-      margin: 20px;
-    }
-
-    #recentupdates {
-      background-color: #f9f9f9;
-      padding: 20px;
-    }
-
-    #license {
-      background-color: #f9f9f9;
-      padding: 20px;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
+  <script src="layout.js"></script>
 </head>
 </head>
 
@@ -51,18 +12,21 @@
   <a href="index.html">
     <div id="topbar"></div>
   </a>
-  <div id="topmenu">
-    <a href="develop.html">Develop</a>
-    <a href="architecture.html">Architecture</a>
-    <a href="about.html">About</a>
-    <a href="https://www.webex.com" target="_blank">Webex</a>
-  </div>
-  <img
-    src="https://media.licdn.com/dms/image/D5603AQFj1QDsM4Nyjw/profile-displayphoto-shrink_400_400/0/1674368919395?e=1684368000&v=beta&t=0k3klQhCMaAow1OuEFJVBR863ELOIS-O6j9Xli6Yxnc"
-    alt="Summer Fang" width="200" height="200">
-  <div>
-
-  </div>
+  <section>
+    <script>
+      header();
+    </script>
+  </section>
+  <section>
+    <img
+      src="https://media.licdn.com/dms/image/D5603AQFj1QDsM4Nyjw/profile-displayphoto-shrink_400_400/0/1674368919395?e=1684368000&v=beta&t=0k3klQhCMaAow1OuEFJVBR863ELOIS-O6j9Xli6Yxnc"
+      alt="Summer Fang" width="200" height="200">
+  </section>
+  <section>
+    <script>
+      footer();
+    </script>
+  </section>
 </body>
 <script>
   var today = new Date();
