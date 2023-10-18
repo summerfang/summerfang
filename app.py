@@ -18,4 +18,4 @@ def architecture():
 
 @app.route('/engineering')
 def engineering():
-    return render_template('engineerin.html')
+    return render_template('engineering.html')
