@@ -2,7 +2,9 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/') 
+@app.route('/index')
+@app.route('/home')
 def index():
     return render_template('home.html')
 
@@ -10,6 +12,10 @@ def index():
 def about():
     return render_template('about.html', title='About')
 
-@app.route('/hello')
-def hello():
-    return 'Hello, World!'
+@app.route('/architecture')
+def architecture():
+    return render_template('architecture.html')
+
+@app.route('/engineering')
+def engineering():
+    return render_template('engineerin.html')
