@@ -167,6 +167,7 @@
     </style>
 
     <div class="form-floating" id="askSummer" draggable="true" ondragstart="drag(event)">
+      <div class="form-control" id="askSummerConversationTextarea"></div>
       <textarea class="form-control" placeholder="Who is Summer?" id="askSummerTextarea"></textarea>
       <label for="floatingTextarea">Ask Summer</label>
     </div>
@@ -182,20 +183,34 @@
     askSummer.addEventListener('keydown', (event) => {
       if (event.key === "Enter") {
 
-        var server_data = [
-          { "Question": askSummer.value },
-        ];
+        // var server_data = [
+        //   { "Question": askSummer.value },
+        // ];
 
 
-        $.ajax({
-          type: 'POST',
-          url: '/askSummer',
-          data: {Question: askSummer.value},
-          dataType: 'json'
-        })
-        .done(function(data){
-          console.log(data.output);
-        });
+        // $.ajax({
+        //   type: 'POST',
+        //   url: '/askSummer',
+        //   data: {Question: askSummer.value},
+        //   dataType: 'application/json'
+        // })
+        // .done(function(data){
+        //   console.log(data.output);
+        // });
+
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+          if (this.readyState  == 4 && this.status == 200) {
+            askSummerConversationTextarea = document.getElementById('askSummerConversationTextarea')
+            askSummerConversationTextarea.innerHTML = "answer of " + this.responseText
+          }
+        }
+        xhttp.open('POST', '/askSummer', true)
+        xhttp.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+        // xhttp.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+        xhttp.send("question=" + askSummer.value)
+
         askSummer.value = "";
       }
     })

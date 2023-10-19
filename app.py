@@ -23,8 +23,7 @@ def engineering():
 @app.route('/askSummer', methods=['GET', 'POST'])
 def askSummer():
     if request.method == 'POST':
-        question = request.get_json()
+        question = request.form['question']
         print(question)
 
-    result = [{'question': 'I asdf good'}, {'pro','dd'}]
-    return jsonify(result)
+    return question
