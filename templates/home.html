@@ -158,7 +158,7 @@
       footer();
     </script>
     <style>
-      #askSummer {
+      #askSummerDialog {
         position: fixed;
         bottom: 0px;
         right: 0px;
@@ -166,10 +166,15 @@
       }
     </style>
 
-    <div class="form-floating" id="askSummer" draggable="true" ondragstart="drag(event)">
-      <div class="form-control" id="askSummerConversationTextarea"></div>
-      <textarea class="form-control" placeholder="Who is Summer?" id="askSummerTextarea"></textarea>
-      <label for="floatingTextarea">Ask Summer</label>
+    <div class="form-floating" id="askSummerDialog" draggable="true" ondragstart="drag(event)">
+      <div class="form-control" id="askSummerConversationTextarea">
+        <textarea class="form-control" placeholder="Conversation" id="qaHistoryTA"></textarea>
+        <label for="floatingTextarea"></label>        
+      </div>
+      <div>
+        <textarea class="form-control" placeholder="Who is Summer?" id="askSummerTA"></textarea>
+        <label for="floatingTextarea">Ask Summer</label>
+      </div>
     </div>
   </div>
   <script>
@@ -179,7 +184,7 @@
       even.target.appendChild(document.getElementById(fetchData));
     }
 
-    const askSummer = document.getElementById("askSummerTextarea");
+    const askSummer = document.getElementById("askSummerTA");
     askSummer.addEventListener('keydown', (event) => {
       if (event.key === "Enter") {
 
@@ -200,10 +205,11 @@
 
         var xhttp = new XMLHttpRequest();
 
-        xhttp.onreadystatechange = function() {
-          if (this.readyState  == 4 && this.status == 200) {
-            askSummerConversationTextarea = document.getElementById('askSummerConversationTextarea')
-            askSummerConversationTextarea.innerHTML = "answer of " + this.responseText
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            qaHistoryTA = document.getElementById('qaHistoryTA')
+            conversation_history = qaHistoryTA.value
+            qaHistoryTA.value = conversation_history + "\nanswer of " + this.responseText
           }
         }
         xhttp.open('POST', '/askSummer', true)

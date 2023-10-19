@@ -1,0 +1,35 @@
+﻿article_id,title,subtitle,content,date_create,date_lastmodified,author_name
+1,Evolution not revolution,An approach which has less risk on your business,"In the fast-paced world of software development, change is inevitable. As new technologies emerge and business needs evolve, it becomes necessary to update the architecture of software applications. However, the process of architecture change is not as simple as tearing everything down and starting from scratch. It requires careful planning, consideration of priorities, and a strategy for migration.
+
+The first point to consider when approaching architecture change is the approach to take. Rather than a revolution, a gradual evolution is recommended. A revolution can be risky and may disrupt the existing system. A gradual approach allows for incremental changes to be made, reducing the risk of failure and ensuring that the architecture evolves in a controlled manner. This approach is especially relevant when working with legacy systems, which require a delicate balance of preservation and modernization.
+
+When making an architecture change, there is often a choice between prioritizing new features or technology. It's important to choose one and stick to it. While product managers may argue that they get nothing new from a technology change, technology can enable new features, improve performance, and simplify maintenance. Therefore, it's suggested that technology change should be prioritized over new features. It's also important to ensure that engineers do not change features during the architecture change process. Changing features adds complexity and may increase the risk of failure.
+
+Migration is often the most challenging part of architecture change. Before embarking on a migration, it's essential to consider whether migration is necessary or whether it's feasible to avoid it. If migration is necessary, it's important to have a migration plan in place. The plan should include a clear understanding of what needs to be migrated, how it will be migrated, and how the migration will be tested. It's also important to communicate the migration plan to customers and stakeholders to manage expectations and minimize disruption.
+
+In conclusion, architecture change is an essential aspect of software development. It's important to approach architecture change gradually, prioritize technology over features, and carefully plan migration. By following these guidelines, developers can ensure that the architecture of their applications evolves in a controlled and effective manner, enabling them to keep pace with the evolving needs of their business and customers.",,,Summer Fang
+2,Code reuse - It is not as important as you think to reuse the code,,"Code reuse is often seen as a best practice in software development, as it can lead to significant time and cost savings. However, it is not always as important as you might think. In some cases, reusing code can actually lead to more harm than good, especially when it comes to tight coupling and architecture principles.
+
+One of the most important principles of software architecture is the idea of cutting big and complicated stuff into smaller and independent pieces. This helps to make your code more modular and easier to maintain, as each piece can be tested and modified independently without affecting the rest of the system. When you reuse code, you run the risk of introducing tight coupling, which can make it harder to modify and maintain the code over time.
+
+Another challenge with reusing code is that business logic is often difficult to reuse because it frequently changes. In order to effectively reuse code, you need to watch very carefully to find the stable parts and separate them from the parts that change frequently. This can be a time-consuming and difficult process, and it may not always be worth the effort.
+
+Despite these challenges, there are still some best practices that can help you effectively reuse code in your software development projects. One of the most important is to focus on building business-independent components, such as timezone utilities, string libraries, and other utility functions. These types of components are less likely to change frequently, and they can be reused across a variety of projects and applications.
+
+In addition to building business-independent components, it is also important to follow good coding practices that promote code reuse. This includes using a consistent coding style, commenting your code effectively, and making your code as modular as possible. By following these best practices, you can help ensure that your code is reusable and maintainable over time.
+
+In conclusion, while code reuse can be a valuable tool in software development, it is not always as important as you might think. Reusing code can introduce tight coupling and other architectural challenges, and it can be difficult to find stable parts of your business logic to reuse. However, by focusing on building business-independent components and following good coding practices, you can effectively reuse code and build more maintainable and scalable software over time.",,,Summer Fang
+,关于公司要不要设立测试的讨论,," 第一个问题，要不要专职测试员。
+
+如果推崇把质量作为企业的核心价值，我认为专职的测试是必须的，无论团队规模大小。这是质量和专业分工的关系决定的。做事情的人不能和监督的人是同一个人，打个不恰当的比方就是运动员不能是裁判员。
+
+可能有人会说，某某项目没有测试也做得不错，我相信，有这种情况。通常是开发员特别强，同时项目也不太大。但这就把质量押宝在特定的开发员身上了，而不是依靠一个体系来保证质量。
+
+还有人会说，有的时候设立了专职测试人员后质量反而下降了，因为开发员工都不好好做单元测试了，等着测试员报Bug。我同意，这往往是一个公司设立 专职测试后面临的第一个陷阱。采用一种新的管理体系是要付出代价的。在新模式中开发和测试的工作内容是要经过设计和训练的。不是把开发和测试分开质量就自 动上升。
+
+第二个问题，开发和测试比例的问题。我个人认为取决于产品类型和发布方式。我熟悉的SaaS领域里，如果产品以Web网页的形式发布，开发和测试 的比例大概是1:1。测试人员主要消耗在几种事情中：第一，主要开发版本的测试。产品总是要求有新功能来满足客户不停提出的要求，因此，我们一年发布一次 大版本。这时，测试人员的人数大约是开发人员的75%，在第一天就和开发员一起，知道项目完成。前半段是新特性测试，后半段是回归测试。第二，补丁版本。 因为主要版本通常耗时很长，而有的客户会要求你尽快提供某些缺陷的修复，或特定新特性，这样，你需要有一部分人专注在这样的小版本上。我们的周期大约是一 个月一次。需要的测试人员通常是主要版本测试人员的10%。第三，特定版本。特定版本通常是指某些中型规模的特性，SP做不下，主版本又等不及，这就经常 组织一只专门团队来做，其中开发和测试的比例是和大版本中差不多的。但我们通常会在质量达标后合并到某个SP中。当然，这个比例不是绝对的，受到产品开发 类型，发布模式，预算，甚至老板的观念问题的影响。我们比例就在1.5:1左右。
+
+第三个问题，测试员素质问题。实际上对测试员的要求和对开发员的要求是有所不同的。测试员需要一种特性，这种特性近乎对产品完美要吹毛求疵，敢于 或有信心和开发员发表不同意见，同时具备广博的知识和非常聪明的工作方式，用高效的方法来完成测试的最大覆盖度。总的来说，我们对开发人员和测试人员的素 质要求是在同一水平线上的，但关注有一些不同的方面。
+————————————————
+版权声明：本文为CSDN博主「summerfang」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/summerfang/article/details/3960952",3/5/2009,,Summer Fang
