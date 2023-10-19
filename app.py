@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
@@ -19,3 +19,12 @@ def architecture():
 @app.route('/engineering')
 def engineering():
     return render_template('engineering.html')
+
+@app.route('/askSummer', methods=['GET', 'POST'])
+def askSummer():
+    if request.method == 'POST':
+        question = request.get_json()
+        print(question)
+
+    result = [{'question': 'I asdf good'}, {'pro','dd'}]
+    return jsonify(result)
