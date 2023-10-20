@@ -3,3 +3,5 @@ target/
 __pycache__/
 .vscode/
 articledb/*.db
+scraped.csv
+embeddings.csv
