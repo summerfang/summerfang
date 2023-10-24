@@ -158,22 +158,90 @@
       footer();
     </script>
     <style>
-      #askSummerDialog {
+      #askSummerDialogDiv {
         position: fixed;
         bottom: 0px;
         right: 0px;
+        height: 800px;
+        width: 400px;
         padding: 10px 0px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border-radius: 5px;
+        /* 5px rounded corners */
+
       }
+
+      #askSummerConversationHistoryDiv {
+        height: 600px;
+        overflow: scroll;
+      }
+
+      #askSummerConversationHistoryDiv img {
+        max-width: 30px;
+        width: 100%;
+        margin-right: 20px;
+        border-radius: 50%;
+      }
+
+      #askSummerConversationHistoryDiv p {
+        text-align: left;
+      }
+
+      /* #askSummerConversationHistoryDiv::after {
+        content: "";
+        clear: both;
+        display: table;
+      } */
+
+      #askSummerQuestionDiv {
+        position: fixed;
+        width: 400px;
+        height: 50px;
+        bottom: 3px;
+      }
+
+      .circle-singleline {
+        float: left;
+        margin: 20px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        font-size: 18px;
+        line-height: 30px;
+        text-align: center;
+        background: #808080;
+        color: #fff;
+      }
+      .circle-singleline::after {
+        clear: left;
+      }
+
+      .answer {
+        float: left;
+      }
+
+      .answer::after{
+        clear: both;
+      }
+      /* .circle-singleline::after{
+        content: "";
+        clear: both;
+        display: table;
+      } */
+
     </style>
 
-    <div class="form-floating" id="askSummerDialog" draggable="true" ondragstart="drag(event)">
-      <div class="form-control" id="askSummerConversationTextarea">
-        <textarea class="form-control" placeholder="Conversation" id="qaHistoryTA"></textarea>
-        <label for="floatingTextarea"></label>        
+    <div class="form-floating" id="askSummerDialogDiv" draggable="true" ondragstart="drag(event)">
+      <div id="askSummerTitle">
+        <p>Ask Summer</p>
       </div>
-      <div>
+      <div id="askSummerConversationHistoryDiv">
+      </div>
+      <div id="askSummerQuestionDiv" class="input-group mb-3">
         <textarea class="form-control" placeholder="Who is Summer?" id="askSummerTA"></textarea>
-        <label for="floatingTextarea">Ask Summer</label>
+        <!-- <label for="floatingTextarea">Ask</label> -->
+        <button class="btn btn-success" type="submit">Ask</button>
       </div>
     </div>
   </div>
@@ -187,37 +255,49 @@
     const askSummer = document.getElementById("askSummerTA");
     askSummer.addEventListener('keydown', (event) => {
       if (event.key === "Enter") {
-
-        // var server_data = [
-        //   { "Question": askSummer.value },
-        // ];
-
-
-        // $.ajax({
-        //   type: 'POST',
-        //   url: '/askSummer',
-        //   data: {Question: askSummer.value},
-        //   dataType: 'application/json'
-        // })
-        // .done(function(data){
-        //   console.log(data.output);
-        // });
-
         var xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
-            qaHistoryTA = document.getElementById('qaHistoryTA')
-            conversation_history = qaHistoryTA.value
-            qaHistoryTA.value = conversation_history + "\nanswer of " + this.responseText
+            const SummerAvarta = document.createElement('img')
+            SummerAvarta.src = "{{ url_for('static', filename='summerfang.jpeg') }}"
+
+            const answerFromSummer = document.createElement("p");
+            const oneQuestion = document.createTextNode(this.responseText);
+            answerFromSummer.append(oneQuestion)
+            const answerFromSummerDiv = document.createElement("div")
+            answerFromSummerDiv.classList.add("answer")
+            answerFromSummerDiv.append(SummerAvarta)
+            answerFromSummerDiv.append(answerFromSummer)
+            // document.getElementById("askSummerConversationHistoryDiv").append(SummerAvarta)
+            document.getElementById("askSummerConversationHistoryDiv").append(answerFromSummerDiv)
           }
         }
         xhttp.open('POST', '/askSummer', true)
         xhttp.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-        // xhttp.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
         xhttp.send("question=" + askSummer.value)
 
+        const QuestionAvarta = document.createElement('div')
+        const QuestionerLetter = document.createTextNode('Q')
+        QuestionAvarta.classList.add("circle-singleline")
+        QuestionAvarta.append(QuestionerLetter)
+
+
+        const question2Summerp = document.createElement("p");
+        const oneQuestion = document.createTextNode(askSummerTA.value);
+        question2Summerp.append(oneQuestion)
+
+        const question2SummerDiv = document.createElement("div")
+        question2SummerDiv.append(QuestionAvarta)
+        question2SummerDiv.append(question2Summerp)
+        // document.getElementById("askSummerConversationHistoryDiv").append(SummerAvarta)
+        // document.getElementById("askSummerConversationHistoryDiv").append(QuestionAvarta)
+
+        document.getElementById("askSummerConversationHistoryDiv").append(question2SummerDiv)
+
         askSummer.value = "";
+
+
       }
     })
 
