@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 # from flask_talisman import Talisman
 
+import requests
+
 import openai, os
 import pandas as pd
 import numpy as np
@@ -82,8 +84,30 @@ def answer_question(
         print(e)
         return ""
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def send_message2Summer(question):
+    webex_msg_api_url = 'https://webexapis.com/v1/messages'
+
+    WEBEX_ACCESS_TOKEN = os.getenv("WEBEX_ACCESS_TOKEN")
+    ASK_SUMMER_BOT_ID = os.getenv("ASK_SUMMER_BOT_ID")
     
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {WEBEX_ACCESS_TOKEN}'
+    }
+
+    msg = {
+        "roomId": ASK_SUMMER_BOT_ID,
+        "text": f'{question}'
+    }
+
+    requests.post(webex_msg_api_url, headers=headers, json = msg)
+
+    return "I'm unsure, but I'll inform Summer."
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+
 df = pd.read_csv('./articledb/embeddings.csv', index_col=0)
 df['embeddings'] = df['embeddings'].apply(literal_eval).apply(np.array)
 
@@ -114,4 +138,6 @@ def askSummer():
         question = request.form['question']
         answer = answer_question(df, question=question)
 
+        if answer == "I don't know.":
+            return send_message2Summer(question)
     return answer
