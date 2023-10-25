@@ -232,7 +232,7 @@
       </div>
       <div id="askSummerQuestionDiv" class="input-group mb-3">
         <textarea class="form-control" placeholder="Who is Summer?" id="askSummerTA"></textarea>
-        <button class="btn btn-success" type="submit">Ask</button>
+        <button class="btn btn-success" type="submit" onclick="answer()">Ask</button>
       </div>
     </div>
   </div>
@@ -288,6 +288,47 @@
       }
     })
 
+  function answer() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        const SummerAvarta = document.createElement('img')
+        SummerAvarta.src = "{{ url_for('static', filename='summerfang.jpeg') }}"
+
+        const answerFromSummer = document.createElement("p");
+        const oneQuestion = document.createTextNode(this.responseText);
+        answerFromSummer.append(oneQuestion)
+        const answerFromSummerDiv = document.createElement("div")
+        answerFromSummerDiv.classList.add("answer")
+        answerFromSummerDiv.append(SummerAvarta)
+        answerFromSummerDiv.append(answerFromSummer)
+        document.getElementById("askSummerConversationHistoryDiv").append(answerFromSummerDiv)
+      }
+    }
+    xhttp.open('POST', '/askSummer', true)
+    xhttp.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+    xhttp.send("question=" + askSummer.value)
+
+    const QuestionAvarta = document.createElement('div')
+    const QuestionerLetter = document.createTextNode('Q')
+    QuestionAvarta.classList.add("circle-singleline")
+    QuestionAvarta.append(QuestionerLetter)
+
+
+    const question2Summerp = document.createElement("p");
+    const oneQuestion = document.createTextNode(askSummerTA.value);
+    question2Summerp.append(oneQuestion)
+
+    const question2SummerDiv = document.createElement("div")
+    question2SummerDiv.classList.add("question")
+    question2SummerDiv.append(QuestionAvarta)
+    question2SummerDiv.append(question2Summerp)
+
+    document.getElementById("askSummerConversationHistoryDiv").append(question2SummerDiv)
+
+    askSummer.value = "";
+  }
   </script>
 </body>
 
