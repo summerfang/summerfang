@@ -1,9 +1,6 @@
-from flask import Flask, render_template, request, jsonify
-import openai, os
 import pandas as pd
 import numpy as np
 from ast import literal_eval
-
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
 
 def create_context(
@@ -79,35 +76,3 @@ def answer_question(
     except Exception as e:
         print(e)
         return ""
-    
-df=pd.read_csv('./articledb/embeddings.csv', index_col=0)
-df['embeddings'] = df['embeddings'].apply(literal_eval).apply(np.array)
-
-app = Flask(__name__)
-
-@app.route('/') 
-@app.route('/index')
-@app.route('/home')
-def index():
-    return render_template('home.html')
-
-@app.route('/about')
-def about():
-    return render_template('about.html', title='About')
-
-@app.route('/architecture')
-def architecture():
-    return render_template('architecture.html')
-
-@app.route('/engineering')
-def engineering():
-    return render_template('engineering.html')
-
-@app.route('/askSummer', methods=['GET', 'POST'])
-def askSummer():
-    if request.method == 'POST':
-        question = request.form['question']
-        answer = answer_question(df, question=question)
-
-    return answer
-
