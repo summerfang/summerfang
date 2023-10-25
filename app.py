@@ -5,6 +5,7 @@ import numpy as np
 from ast import literal_eval
 
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def create_context(
     question, df, max_len=1800, size="ada"
