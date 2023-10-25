@@ -161,7 +161,7 @@
       #askSummerDialogDiv {
         position: fixed;
         bottom: 0px;
-        right: 0px;
+        right: 10px;
         height: 600px;
         width: 400px;
         padding: 10px 0px;
@@ -172,8 +172,10 @@
       }
 
       #askSummerConversationHistoryDiv {
+
         height: 500px;
-        overflow: visible;
+        max-width: 500px;
+        overflow-y: auto;
         text-align: left;
       }
 
@@ -261,6 +263,7 @@
             answerFromSummerDiv.append(SummerAvarta)
             answerFromSummerDiv.append(answerFromSummer)
             document.getElementById("askSummerConversationHistoryDiv").append(answerFromSummerDiv)
+            document.getElementById("askSummerConversationHistoryDiv").scrollTop = document.getElementById("askSummerConversationHistoryDiv").scrollHeight
           }
         }
         xhttp.open('POST', '/askSummer', true)
@@ -283,6 +286,7 @@
         question2SummerDiv.append(question2Summerp)
 
         document.getElementById("askSummerConversationHistoryDiv").append(question2SummerDiv)
+        document.getElementById("askSummerConversationHistoryDiv").scrollTop = document.getElementById("askSummerConversationHistoryDiv").scrollHeight
 
         askSummer.value = "";
       }

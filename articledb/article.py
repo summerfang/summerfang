@@ -1,8 +1,3 @@
-import pandas as pd
-import numpy as np
-from ast import literal_eval
-from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
-
 def create_context(
     question, df, max_len=1800, size="ada"
 ):

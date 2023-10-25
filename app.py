@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, jsonify
+# from flask_talisman import Talisman
+
 import openai, os
 import pandas as pd
 import numpy as np
 from ast import literal_eval
-
+# from articledb.article import answer_question
 from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def create_context(
     question, df, max_len=1800, size="ada"
@@ -80,11 +81,14 @@ def answer_question(
     except Exception as e:
         print(e)
         return ""
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
     
-df=pd.read_csv('./articledb/embeddings.csv', index_col=0)
+df = pd.read_csv('./articledb/embeddings.csv', index_col=0)
 df['embeddings'] = df['embeddings'].apply(literal_eval).apply(np.array)
 
 app = Flask(__name__)
+# Talisman(app)
 
 @app.route('/') 
 @app.route('/index')
@@ -111,4 +115,3 @@ def askSummer():
         answer = answer_question(df, question=question)
 
     return answer
-
