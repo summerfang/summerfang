@@ -1,8 +1,25 @@
 from flask import Flask, render_template, request, jsonify
 # from flask_talisman import Talisman
+import os
+
+import configcatclient
+import logging
 
 from webex.webex import send_message2Summer
 from articledb.article import answer_question
+
+logging.basicConfig(level=logging.INFO)
+
+CONFIGCAT_KEY = os.getenv("CONFIGCAT_KEY")
+
+configcat_client = configcatclient.get(CONFIGCAT_KEY)
+
+isMyFirstFeatureEnabled = configcat_client.get_value('isMyFirstFeatureEnabled', False)
+isTagsEnabled = configcat_client.get_value('isTagsEnabled', False)
+
+print('isMyFirstFeatureEnabled\'s value from ConfigCat: ' + str(isMyFirstFeatureEnabled))
+print('isTagsEnabled\'s value from ConfigCat: ' + str(isTagsEnabled))
+
 
 app = Flask(__name__)
 # Talisman(app)

@@ -1,0 +1,13 @@
+configcat:
+
+Basic auth user name: 
+08dbd5ea-9385-4fcc-88b2-e24382a93caf
+
+Basic auth password:
+mkP0sQYAoPFO/fVdgRIKhrKzyUUWVpEoQKaz3O8F2v4=
+
+Base64 header:
+Basic MDhkYmQ1ZWEtOTM4NS00ZmNjLTg4YjItZTI0MzgyYTkzY2FmOm1rUDBzUVlBb1BGTy9mVmRnUklLaHJLenlVVVdWcEVvUUthejNPOEYydjQ9
+
+configcat_key:
+5NXbCETlhkyJacJfmX1DVg/TtbOTX1F8kiA74FlXO8t5A
