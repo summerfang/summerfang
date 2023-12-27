@@ -3,9 +3,24 @@
 # import numpy as np
 # from ast import literal_eval
 # from articledb.article import answer_question
-from openai.embeddings_utils import distances_from_embeddings, cosine_similarity
+# from openai.embedding_utils import distances_from_embeddings, cosine_similarity
 
 from articledb import openai, df
+from scipy.spatial.distance import cosine
+
+def distances_from_embeddings(embeddings, query_embedding):
+    """
+    Calculate the cosine similarity between each embedding in `embeddings` and `query_embedding`.
+
+    Args:
+        embeddings (List[List[float]]): A list of embeddings, where each embedding is a list of floats.
+        query_embedding (List[float]): The query embedding, represented as a list of floats.
+
+    Returns:
+        List[float]: A list of cosine similarities between each embedding in `embeddings` and `query_embedding`.
+    """
+    return [1 - cosine(embedding, query_embedding) for embedding in embeddings]
+
 
 def create_context(question, df, max_len=1800, size="ada"):
     """
@@ -18,7 +33,8 @@ def create_context(question, df, max_len=1800, size="ada"):
 
     # Get the distances from the embeddings
     df['distances'] = distances_from_embeddings(
-        q_embeddings, df['embeddings'].values, distance_metric='cosine')
+        # q_embeddings, df['embeddings'].values, distance_metric='cosine')
+        q_embeddings, df['embeddings'].values)
 
     returns = []
     cur_len = 0
