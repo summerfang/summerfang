@@ -9,13 +9,12 @@ app.register_blueprint(happymeet, url_prefix='/meet')
 
 @app.route('/')
 def index():
-    # if request.host == 'happymeet.me':
-    if request.host == '127.0.0.1:5000':
+    if request.host == 'happymeet.me':
         return redirect('/summerfang')
     elif request.host == 'happymeet.me':
         return redirect('/meet')
     else:
-        return "Still under construction."
+        return redirect('/summerfang')
 
 if __name__ == '__main__':
     app.run(debug=True)
