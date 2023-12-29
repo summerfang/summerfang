@@ -1,14 +1,13 @@
-# import openai, os
-# import pandas as pd
-# import numpy as np
-# from ast import literal_eval
-# from articledb.article import answer_question
-# from openai.embedding_utils import distances_from_embeddings, cosine_similarity
+import os
+from ast import literal_eval
 
-from articledb import openai, df
+import pandas as pd
+import numpy as np
 from scipy.spatial.distance import cosine
 
-def distances_from_embeddings(embeddings, query_embedding):
+from openai import OpenAI
+
+def distances_from_embeddings(query_embedding, embeddings):
     """
     Calculate the cosine similarity between each embedding in `embeddings` and `query_embedding`.
 
@@ -22,19 +21,20 @@ def distances_from_embeddings(embeddings, query_embedding):
     return [1 - cosine(embedding, query_embedding) for embedding in embeddings]
 
 
-def create_context(question, df, max_len=1800, size="ada"):
+def create_context(
+    client, question, df, max_len=1800, size="ada"
+):
     """
     Create a context for a question by finding the most similar context from the dataframe
     """
 
     # Get the embeddings for the question
-    q_embeddings = openai.Embedding.create(
-        input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
+    # q_embeddings = client.embeddings.create(input=question, model='text-embedding-ada-002')['data'][0]['embedding']
+    # q_embeddings = client.embeddings.create(input=question, model='text-embedding-ada-002')
+    q_embeddings = client.embeddings.create(input=question, model='text-embedding-ada-002').data[0].embedding
 
     # Get the distances from the embeddings
-    df['distances'] = distances_from_embeddings(
-        # q_embeddings, df['embeddings'].values, distance_metric='cosine')
-        q_embeddings, df['embeddings'].values)
+    df['distances'] = distances_from_embeddings(q_embeddings, df['embeddings'].values)
 
     returns = []
     cur_len = 0
@@ -55,10 +55,9 @@ def create_context(question, df, max_len=1800, size="ada"):
     # Return the context
     return "\n\n###\n\n".join(returns)
 
-
 def answer_question(
-    df = df,
-    model="text-davinci-003",
+    # df=df,
+    model="gpt-3.5-turbo",
     question="Am I allowed to publish model outputs to Twitter, without a human review?",
     max_len=1800,
     size="ada",
@@ -69,7 +68,18 @@ def answer_question(
     """
     Answer a question based on the most similar context from the dataframe texts
     """
+    try:    
+        client = OpenAI()
+
+    except Exception as e:
+        print(e)
+        return "openai client error"
+    
+    df = pd.read_csv('./articledb/embeddings.csv', index_col=0)
+    df['embeddings'] = df['embeddings'].apply(literal_eval).apply(np.array)
+
     context = create_context(
+        client,
         question,
         df,
         max_len=max_len,
@@ -81,18 +91,24 @@ def answer_question(
         print("\n\n")
 
     try:
-        # Create a completions using the question and context
-        response = openai.Completion.create(
-            prompt=f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:",
+        # Create a chat completion using the question and context
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\n"},
+                {"role": "user", f"content": "Context: {context}\n\n---\n\nQuestion: {question}\nAnswer:"}
+            ],
             temperature=0,
             max_tokens=max_tokens,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0,
             stop=stop_sequence,
-            model=model,
         )
-        return response["choices"][0]["text"].strip()
+        return response.choices[0].message.content.strip()
     except Exception as e:
         print(e)
-        return ""
+        return "I don't know"
+    
+answer = answer_question(question="How about reuse the code?")
+print(answer)

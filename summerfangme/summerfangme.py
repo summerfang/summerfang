@@ -6,7 +6,7 @@ from articledb.article import answer_question
 # import logging
 
 from webex.webex import send_message2Summer
-from articledb.article import answer_question
+# from articledb.article import answer_question
 
 # from . import summerfang
 
@@ -59,6 +59,9 @@ def askSummer():
         question = request.form['question']
         answer = answer_question(question=question)
 
-        if answer == "I don't know.":
+        if answer == "openai client error":
+            send_message2Summer(question)
+            return "AI is not available at the moment. I'll inform Summer."
+        if answer == "I don't know":
             return send_message2Summer(question)
     return answer
