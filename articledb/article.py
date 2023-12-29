@@ -110,5 +110,5 @@ def answer_question(
         print(e)
         return "I don't know"
     
-answer = answer_question(question="How about reuse the code?")
-print(answer)
+# answer = answer_question(question="How about reuse the code?")
+# print(answer)
