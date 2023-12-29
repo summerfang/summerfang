@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Summer Fang{{url_for('summerfang.static', filename='style.css')}}</title>
-  <link rel="stylesheet" href="{{ url_for('summerfang.static', filename='style.css', _external=True) }}" />
-  <script src="{{ url_for('summerfang.static', filename='layout.js') }}"></script>
-  <link rel="shortcut icon" href="{{ url_for('summerfang.static', filename='summerfang.jpeg') }}">
+  <title>Summer Fang{{url_for('my_summerfang.static', filename='style.css')}}</title>
+  <link rel="stylesheet" href="{{ url_for('my_summerfang.static', filename='style.css') }}" />
+  <script src="{{ url_for('my_summerfang.static', filename='layout.js') }}"></script>
+  <link rel="shortcut icon" href="{{ url_for('my_summerfang.static', filename='summerfang.jpeg') }}">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -17,7 +17,7 @@
 
 <body>
   <div class="container">
-    <a href="/index">
+    <a href="{{url_for('my_summerfang.index')}}">
       <div id="topbar" class="container p-5 bg-primary text-white text-center">
       </div>
     </a>
@@ -26,16 +26,16 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="/home">Home</a>
+          <a class="nav-link active" href="{{url_for('my_summerfang.index')}}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/engineering">Engineering</a>
+          <a class="nav-link" href="{{url_for('my_summerfang.engineering')}}">Engineering</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/architecture">Architecture</a>
+          <a class="nav-link" href="{{url_for('my_summerfang.architecture')}}">Architecture</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
+          <a class="nav-link" href="{{url_for('my_summerfang.about')}}">About</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://www.webex.com" target="_blank">Webex</a>
@@ -90,7 +90,7 @@
       </div>
       <div class="col-sm-4">
         <div class="card" style="width:400px">
-          <img class="card-img-top" src="{{ url_for('static', filename='summerfang.jpeg') }}""
+          <img class="card-img-top" src="{{ url_for('my_summerfang.static', filename='summerfang.jpeg') }}"
             alt=" Summer Fang">
           <div class="card-body">
             <h4 class="card-title">Summer Fang</h4>
@@ -270,7 +270,7 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             const SummerAvarta = document.createElement('img')
-            SummerAvarta.src = "{{ url_for('static', filename='summerfang.jpeg') }}"
+            SummerAvarta.src = "{{ url_for('my_summerfang.static', filename='summerfang.jpeg') }}"
 
             const answerFromSummer = document.createElement("p");
             const oneQuestion = document.createTextNode(this.responseText);
@@ -283,7 +283,7 @@
             document.getElementById("askSummerConversationHistoryDiv").scrollTop = document.getElementById("askSummerConversationHistoryDiv").scrollHeight
           }
         }
-        xhttp.open('POST', '/askSummer', true)
+        xhttp.open('POST', "{{url_for('my_summerfang.askSummer')}}", true)
         xhttp.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhttp.send("question=" + askSummer.value)
 
@@ -315,7 +315,7 @@
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           const SummerAvarta = document.createElement('img')
-          SummerAvarta.src = "{{ url_for('static', filename='summerfang.jpeg') }}"
+          SummerAvarta.src = "{{ url_for('my_summerfang.static', filename='summerfang.jpeg') }}"
 
           const answerFromSummer = document.createElement("p");
           const oneQuestion = document.createTextNode(this.responseText);
@@ -327,7 +327,7 @@
           document.getElementById("askSummerConversationHistoryDiv").append(answerFromSummerDiv)
         }
       }
-      xhttp.open('POST', '/askSummer', true)
+      xhttp.open('POST',  "{{url_for('my_summerfang.askSummer')}}", true)
       xhttp.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
       xhttp.send("question=" + askSummer.value)
 

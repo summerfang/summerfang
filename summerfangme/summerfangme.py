@@ -31,7 +31,7 @@ isTagsEnabled = configcat_client.get_value('isTagsEnabled', False)
 # print('isMyFirstFeatureEnabled\'s value from ConfigCat: ' + str(isMyFirstFeatureEnabled))
 print('isTagsEnabled\'s value from ConfigCat: ' + str(isTagsEnabled))
 
-summerfang = Blueprint('summerfang', __name__, template_folder='templates', static_folder='static')
+summerfang = Blueprint('my_summerfang', __name__, template_folder='templates', static_folder='static')
 
 @summerfang.route('/') 
 @summerfang.route('/index')
