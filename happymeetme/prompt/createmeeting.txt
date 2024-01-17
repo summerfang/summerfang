@@ -1,0 +1,146 @@
+{
+  "adhoc": false,
+  "enabledAutoRecordMeeting": false,
+  "allowAnyUserToBeCoHost": false,
+  "enabledJoinBeforeHost": false,
+  "enableConnectAudioBeforeHost": false,
+  "excludePassword": false,
+  "publicMeeting": false,
+  "enabledWebcastView": false,
+  "enableAutomaticLock": false,
+  "allowFirstUserToBeCoHost": false,
+  "allowAuthenticatedDevices": false,
+  "sendEmail": true,
+  "requireAttendeeLogin": false,
+  "restrictToInvitees": false,
+  "title": "Summer‘s meeting",
+  "start": "2024-02-01T10:00",
+  "end": "2024-02-01T11:00"
+}
+
+{
+  "id": "2b37727b08494b358768cfd61b75fe8a",
+  "meetingNumber": "25589916190",
+  "title": "Summer‘s meeting",
+  "password": "U5HebJNym82",
+  "phoneAndVideoSystemPassword": "85432569",
+  "meetingType": "meetingSeries",
+  "state": "active",
+  "timezone": "UTC",
+  "start": "2024-02-01T10:00:00Z",
+  "end": "2024-02-01T11:00:00Z",
+  "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hZDFjOWVhZC1jNTllLTQ0MmMtOTEyNS03NjVlMDkxYzhhZjg",
+  "hostDisplayName": "Summer Fang",
+  "hostEmail": "summerfang@gmail.com",
+  "hostKey": "801927",
+  "siteUrl": "summerfangcom.my.webex.com",
+  "webLink": "https://summerfangcom.my.webex.com/summerfangcom.my/j.php?MTID=md0150c163f98a383664bda48f741281f",
+  "sipAddress": "25589916190@webex.com",
+  "dialInIpAddress": "173.243.2.68",
+  "enabledAutoRecordMeeting": false,
+  "allowAnyUserToBeCoHost": false,
+  "allowFirstUserToBeCoHost": false,
+  "allowAuthenticatedDevices": true,
+  "enabledJoinBeforeHost": false,
+  "joinBeforeHostMinutes": 0,
+  "enableConnectAudioBeforeHost": false,
+  "excludePassword": false,
+  "publicMeeting": false,
+  "enableAutomaticLock": false,
+  "unlockedMeetingJoinSecurity": "allowJoin",
+  "meetingOptions": {
+    "enabledChat": true,
+    "enabledVideo": true,
+    "enabledNote": true,
+    "noteType": "allowAll",
+    "enabledFileTransfer": false,
+    "enabledUCFRichMedia": false
+  },
+  "attendeePrivileges": {
+    "enabledShareContent": true,
+    "enabledSaveDocument": true,
+    "enabledPrintDocument": true,
+    "enabledAnnotate": true,
+    "enabledViewParticipantList": true,
+    "enabledViewThumbnails": true,
+    "enabledRemoteControl": true,
+    "enabledViewAnyDocument": true,
+    "enabledViewAnyPage": true,
+    "enabledContactOperatorPrivately": false,
+    "enabledChatHost": true,
+    "enabledChatPresenter": true,
+    "enabledChatOtherParticipants": true
+  },
+  "sessionTypeId": 628,
+  "scheduledType": "meeting",
+  "simultaneousInterpretation": {
+    "enabled": false
+  },
+  "enabledVisualWatermark": false,
+  "enabledBreakoutSessions": false,
+  "audioConnectionOptions": {
+    "audioConnectionType": "VoIP",
+    "enabledTollFreeCallIn": false,
+    "enabledGlobalCallIn": false,
+    "enabledAudienceCallBack": false,
+    "entryAndExitTone": "beep",
+    "allowHostToUnmuteParticipants": false,
+    "allowAttendeeToUnmuteSelf": true,
+    "muteAttendeeUponEntry": false
+  }
+}
+
+[{"email":"summerfang2000@gmail","displayName":"Summer Xiao"}]
+
+
+{
+  "adhoc": false,
+  "enabledAutoRecordMeeting": false,
+  "allowAnyUserToBeCoHost": false,
+  "enabledJoinBeforeHost": false,
+  "enableConnectAudioBeforeHost": false,
+  "excludePassword": false,
+  "publicMeeting": false,
+  "enabledWebcastView": false,
+  "enableAutomaticLock": false,
+  "allowFirstUserToBeCoHost": false,
+  "allowAuthenticatedDevices": false,
+  "sendEmail": true,
+  "requireAttendeeLogin": false,
+  "restrictToInvitees": false,
+  "title": "Summer‘s meeting",
+  "start": "2024-02-01T10:00",
+  "end": "2024-02-01T11:00",
+  "invitees": [
+    {
+      "email": "summerfang2000@gmail",
+      "displayName": "Summer Xiao"
+    }
+  ]
+}
+
+{
+  "adhoc": false,
+  "enabledAutoRecordMeeting": false,
+  "allowAnyUserToBeCoHost": false,
+  "enabledJoinBeforeHost": false,
+  "enableConnectAudioBeforeHost": false,
+  "excludePassword": false,
+  "publicMeeting": false,
+  "enabledWebcastView": false,
+  "enableAutomaticLock": false,
+  "allowFirstUserToBeCoHost": false,
+  "allowAuthenticatedDevices": false,
+  "sendEmail": true,
+  "requireAttendeeLogin": false,
+  "restrictToInvitees": false,
+  "title": "Summer‘s meeting",
+  "start": "2024-02-01T10:00",
+  "end": "2024-02-01T11:00",
+  "invitees": [
+    {
+      "email": "fangjianbin2000@gmail.com",
+      "displayName": "Eric"
+    }
+  ]
+}
