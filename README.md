@@ -1,6 +1,6 @@
 # Summer Fang
 
-<img src="https://github.com/summerfang/summerfang/blob/master/static/summerfang.jpeg" alt="Summer Fang" width="200" height="200">
+<img src="https://github.com/summerfang/summerfang/blob/master/summerfangme/static/summerfang.jpeg?raw=true" alt="Summer Fang" width="200" height="200">
 
 Summer Fang is a seasoned engineering leader and currently serves as the Senior Director of Engineering at Cisco, where he is responsible for the development of Webex Webinar. With Summer's expertise, the Webinar capacity has scaled to accommodate up to 100,000 attendees.
 
