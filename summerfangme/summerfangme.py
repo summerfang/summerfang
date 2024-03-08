@@ -57,11 +57,14 @@ def engineering():
 def askSummer():
     if request.method == 'POST':
         question = request.form['question']
-        answer = answer_question(question=question)
+        # answer = answer_question(question=question)
 
-        if answer == "openai client error":
-            send_message2Summer(question)
-            return "AI is not available at the moment. I'll inform Summer."
-        if answer == "I don't know":
-            return send_message2Summer(question)
+        answer = send_message2Summer(question)
+
+        # if answer == "openai client error":
+        #     send_message2Summer(question)
+        #     return "AI is not available at the moment. I'll inform Summer."
+        # if answer == "I don't know":
+        #     return send_message2Summer(question)
     return answer
+    # return "I'm unsure, but I'll inform Summer."

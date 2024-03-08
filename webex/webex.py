@@ -13,6 +13,6 @@ def send_message2Summer(question):
         "text": f'{question}'
     }
 
-    requests.post(WEBEX_MSG_API_URL, headers=headers, json = msg)
+    res = requests.post(WEBEX_MSG_API_URL, headers=headers, json = msg)
 
-    return "I'm unsure, but I'll inform Summer."
+    return res.text
