@@ -3,7 +3,7 @@ import os
 from flask import Flask, redirect, request, jsonify
 from flask_cors import CORS
 
-# from twilio.rest import Client
+from twilio.rest import Client
 
 from summerfangme.summerfangme import summerfang
 from happymeetme import happymeet
@@ -33,13 +33,13 @@ def send_message():
 
         account_sid = os.environ["TWILIO_ACCOUNT_SID"]
         auth_token = os.environ["TWILIO_AUTH_TOKEN"]
-        # client = Client(account_sid, auth_token)
+        client = Client(account_sid, auth_token)
 
-        # message = client.messages.create(
-        #     body="Test from summerfang.me",
-        #     from_="+18559563669",
-        #     to="4088323545",
-        # )
+        message = client.messages.create(
+            body="Test from summerfang.me",
+            from_="+18559563669",
+            to="4088323545",
+        )
 
 
         # Your Twilio logic here
