@@ -3,7 +3,7 @@ import os
 from flask import Flask, redirect, request, jsonify
 from flask_cors import CORS
 
-from twilio.rest import Client
+# from twilio.rest import Client
 
 from summerfangme.summerfangme import summerfang
 from happymeetme import happymeet
