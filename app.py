@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request
+from flask import Flask, redirect, request, jsonify
 
 from summerfangme.summerfangme import summerfang
 from happymeetme import happymeet
@@ -13,6 +13,10 @@ def index():
         return redirect('/meet')
     else:
         return redirect('/summerfang')
+
+@app.route('/api/greeting/<string:name>', methods=['GET'])
+def greet(name):
+    return jsonify(greeting=f"Hello, {name}!")
 
 if __name__ == '__main__':
     app.run(debug=True)
