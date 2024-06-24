@@ -4,3 +4,4 @@ __pycache__/
 .vscode/
 articledb/*.db
 scraped.csv
+.env
