@@ -30,15 +30,17 @@ def greet(name):
 def send_message():
     try:
         data = request.get_json()
-
+        print("-")
+        print(data)
+        print("-")
         account_sid = os.environ["TWILIO_ACCOUNT_SID"]
         auth_token = os.environ["TWILIO_AUTH_TOKEN"]
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(
-            body="Test from summerfang.me",
-            from_="+18559563669",
-            to="4088323545",
+            body=data['body'],
+            from_=data['from'],
+            to=data['to'],
         )
 
 
