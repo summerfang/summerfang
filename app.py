@@ -28,9 +28,11 @@ def greet(name):
 
 @app.route('/api/messages', methods=['POST'])
 def send_message():
-    if 'REACT_APP_X_API_KEY' not in request.headers:
+    if 'x-api-key' not in request.headers:
+        print("No x-api-key in headers")
         return jsonify(success=False), 401
-    if request.headers['REACT_APP_X_API_KEY'] != os.environ['REACT_APP_X_API_KEY']:   
+    if request.headers['x-api-key'] != os.environ['REACT_APP_X_API_KEY']:
+        print("x-api-key does not match")
         return jsonify(success=False), 401  
     
     try:
@@ -48,9 +50,6 @@ def send_message():
             to=data['to'],
         )
 
-
-        # Your Twilio logic here
-        # ...
         return jsonify(success=True)
     except Exception as e:
         print(e)
@@ -58,26 +57,28 @@ def send_message():
 
 @app.route('/api/allmessages', methods=['POST'])
 def send_allmessages():
-    # Add logic if REACT_APP_X_API_KEY is not in the request headers, return 401
-    # Add logic if REACT_APP_X_API_KEY is not equal to the value of X_API_KEY, return 401   
-    if 'REACT_APP_X_API_KEY' not in request.headers:
+    if 'x-api-key' not in request.headers:
+        print("No x-api-key in headers")
         return jsonify(success=False), 401
-    if request.headers['REACT_APP_X_API_KEY'] != os.environ['REACT_APP_X_API_KEY']:   
-        return jsonify(success=False), 401  
+    if request.headers['x-api-key'] != os.environ['REACT_APP_X_API_KEY']:
+        print("x-api-key does not match")
+        return jsonify(success=False), 401
     
-    # Add logic to handle the body of the request, The body of the request is a JSON object which contains an array of objects. Each object contains the following keys:body, from, to
-    # Add logic to send a message to each object in the array
     try:
         data = request.get_json()
         account_sid = os.environ["TWILIO_ACCOUNT_SID"]
         auth_token = os.environ["TWILIO_AUTH_TOKEN"]
         client = Client(account_sid, auth_token)
+
+        # print(data)
+
         for message in data:
             message = client.messages.create(
                 body=message['body'],
                 from_=message['from'],
                 to=message['to'],
             )
+
 
         return jsonify(success=True)
 
