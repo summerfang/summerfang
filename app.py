@@ -9,7 +9,7 @@ from summerfangme.summerfangme import summerfang
 from happymeetme import happymeet
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app, origins=['localhost', 'gettrueup.com', 'summerfang.me'])  # Enable CORS for specific origins
 
 app.register_blueprint(summerfang, url_prefix='/summerfang')
 app.register_blueprint(happymeet, url_prefix='/meet')
@@ -28,6 +28,11 @@ def greet(name):
 
 @app.route('/api/messages', methods=['POST'])
 def send_message():
+    if 'REACT_APP_X_API_KEY' not in request.headers:
+        return jsonify(success=False), 401
+    if request.headers['REACT_APP_X_API_KEY'] != os.environ['REACT_APP_X_API_KEY']:   
+        return jsonify(success=False), 401  
+    
     try:
         data = request.get_json()
         print("-")
@@ -47,6 +52,35 @@ def send_message():
         # Your Twilio logic here
         # ...
         return jsonify(success=True)
+    except Exception as e:
+        print(e)
+        return jsonify(success=False)
+
+@app.route('/api/allmessages', methods=['POST'])
+def send_allmessages():
+    # Add logic if REACT_APP_X_API_KEY is not in the request headers, return 401
+    # Add logic if REACT_APP_X_API_KEY is not equal to the value of X_API_KEY, return 401   
+    if 'REACT_APP_X_API_KEY' not in request.headers:
+        return jsonify(success=False), 401
+    if request.headers['REACT_APP_X_API_KEY'] != os.environ['REACT_APP_X_API_KEY']:   
+        return jsonify(success=False), 401  
+    
+    # Add logic to handle the body of the request, The body of the request is a JSON object which contains an array of objects. Each object contains the following keys:body, from, to
+    # Add logic to send a message to each object in the array
+    try:
+        data = request.get_json()
+        account_sid = os.environ["TWILIO_ACCOUNT_SID"]
+        auth_token = os.environ["TWILIO_AUTH_TOKEN"]
+        client = Client(account_sid, auth_token)
+        for message in data:
+            message = client.messages.create(
+                body=message['body'],
+                from_=message['from'],
+                to=message['to'],
+            )
+
+        return jsonify(success=True)
+
     except Exception as e:
         print(e)
         return jsonify(success=False)
