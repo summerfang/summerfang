@@ -9,7 +9,7 @@ from summerfangme.summerfangme import summerfang
 from happymeetme import happymeet
 
 app = Flask(__name__)
-CORS(app, origins=['localhost:3000', 'www.gettrueup.com', 'gettrue.com','summerfang.me'])  # Enable CORS for specific origins
+CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://www.gettureup.com"]}})
 
 app.register_blueprint(summerfang, url_prefix='/summerfang')
 app.register_blueprint(happymeet, url_prefix='/meet')
