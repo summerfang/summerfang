@@ -33,6 +33,7 @@ def send_message():
         return jsonify(success=False), 401
     if request.headers['x-api-key'] != os.environ['REACT_APP_X_API_KEY']:
         print("x-api-key does not match")
+        print(request.headers['x-api-key'] + " != " + os.environ['REACT_APP_X_API_KEY'])
         return jsonify(success=False), 401  
     
     try:
