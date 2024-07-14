@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, redirect, request, jsonify
-# from flask_cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin
 # from flask_socketio import SocketIO, emit
 from flask_socketio import SocketIO
 
@@ -18,7 +18,10 @@ app = Flask(__name__)
 # app.register_blueprint(summerfang, url_prefix='/summerfang')
 # app.register_blueprint(happymeet, url_prefix='/meet')
 
-socketio = SocketIO(app, cors_allowed_origins="*")
+CORS(app,resources={r"/*":{"origins":"*"}})
+socketio = SocketIO(app,cors_allowed_origins="*")
+
+# socketio = SocketIO(app, cors_allowed_origins="*")
 # socketio = SocketIO(app)
 
 # @app.route('/')
