@@ -18,6 +18,14 @@ def http_call():
     data = {'data':'This text was fetched using an HTTP call to server on render'}
     return jsonify(data)
 
+@app.route('/sms', methods=['POST'])
+# @cross_origin(origins="*")  # This will allow /sms to be accessed from any domain
+def receive_message():
+    print(request.form)
+    socketio.emit('new message', request.form)
+    return jsonify(success=True)
+
+
 @socketio.on("connect")
 def connected():
     """event listener when client connects to the server"""
