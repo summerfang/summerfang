@@ -24,7 +24,10 @@ socketio = SocketIO(app,cors_allowed_origins="*")
 # socketio = SocketIO(app, cors_allowed_origins="*")
 # socketio = SocketIO(app)
 
-# @app.route('/')
+@app.route('/')
+def index():
+    print("Up and running")
+
 # def index():
 #     if request.host == 'happymeet.me' or request.host == 'www.happymeet.me':
 #         return redirect('/meet')
