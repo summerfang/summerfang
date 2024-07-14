@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, redirect, request, jsonify
 from flask_cors import CORS, cross_origin
+from flask_socketio import SocketIO, emit
 
 from twilio.rest import Client
 
@@ -11,13 +12,14 @@ from happymeetme import happymeet
 from trueup.receivesms import receive_recent_7days_messages_by
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://www.gettrueup.com", "https://gettrueup.com"]}})
+# CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://localhost:5000","https://www.gettrueup.com", "https://gettrueup.com"]}})
 
 app.register_blueprint(summerfang, url_prefix='/summerfang')
 app.register_blueprint(happymeet, url_prefix='/meet')
 
-@app.route('/')
+socketio = SocketIO(app, cors_allowed_origins="*")
 
+@app.route('/')
 def index():
     if request.host == 'happymeet.me' or request.host == 'www.happymeet.me':
         return redirect('/meet')
@@ -93,6 +95,7 @@ def send_allmessages():
 @cross_origin(origins="*")  # This will allow /sms to be accessed from any domain
 def receive_message():
     print(request.form)
+    socketio.emit('new message', request.form)
     return jsonify(success=True)
 
 @app.route('/smserror', methods=['POST'])
@@ -166,4 +169,5 @@ def receive_recent_messages():
         return jsonify(success=False)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    socketio.run(app, debug=True)
