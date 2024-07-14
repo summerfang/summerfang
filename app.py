@@ -6,25 +6,25 @@ from flask_socketio import SocketIO, emit
 
 from twilio.rest import Client
 
-from summerfangme.summerfangme import summerfang
-from happymeetme import happymeet
+# from summerfangme.summerfangme import summerfang
+# from happymeetme import happymeet
 
 from trueup.receivesms import receive_recent_7days_messages_by
 
 app = Flask(__name__)
 # CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://localhost:5000","https://www.gettrueup.com", "https://gettrueup.com"]}})
 
-app.register_blueprint(summerfang, url_prefix='/summerfang')
-app.register_blueprint(happymeet, url_prefix='/meet')
+# app.register_blueprint(summerfang, url_prefix='/summerfang')
+# app.register_blueprint(happymeet, url_prefix='/meet')
 
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-@app.route('/')
-def index():
-    if request.host == 'happymeet.me' or request.host == 'www.happymeet.me':
-        return redirect('/meet')
-    else:
-        return redirect('/summerfang')
+# @app.route('/')
+# def index():
+#     if request.host == 'happymeet.me' or request.host == 'www.happymeet.me':
+#         return redirect('/meet')
+#     else:
+#         return redirect('/summerfang')
 
 @app.route('/api/greeting/<string:name>', methods=['GET'])
 def greet(name):
