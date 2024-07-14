@@ -18,8 +18,8 @@ app = Flask(__name__)
 # app.register_blueprint(summerfang, url_prefix='/summerfang')
 # app.register_blueprint(happymeet, url_prefix='/meet')
 
-# socketio = SocketIO(app, cors_allowed_origins="*")
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
+# socketio = SocketIO(app)
 
 # @app.route('/')
 # def index():
