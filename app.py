@@ -8,6 +8,10 @@ app.config['SECRET_KEY'] = 'secret!'
 CORS(app,resources={r"/*":{"origins":"*"}})
 socketio = SocketIO(app,cors_allowed_origins="*")
 
+@app.route("/")
+def index():
+    return "Hello World!"
+
 @app.route("/http-call")
 def http_call():
     """return JSON with string data as the value"""
