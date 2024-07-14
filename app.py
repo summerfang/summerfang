@@ -92,14 +92,14 @@ def send_allmessages():
         return jsonify(success=False)
 
 @app.route('/sms', methods=['POST'])
-@cross_origin(origins="*")  # This will allow /sms to be accessed from any domain
+# @cross_origin(origins="*")  # This will allow /sms to be accessed from any domain
 def receive_message():
     print(request.form)
     socketio.emit('new message', request.form)
     return jsonify(success=True)
 
 @app.route('/smserror', methods=['POST'])
-@cross_origin(origins="*")  # This will allow /sms to be accessed from any domain
+# @cross_origin(origins="*")  # This will allow /sms to be accessed from any domain
 def receive_error_message():
     print(request.form)
     return jsonify(success=True)
