@@ -27,17 +27,14 @@ socketio = SocketIO(app,cors_allowed_origins="*")
 
 @app.route('/')
 def index():
-    return "Hello World!"
+    if request.host == 'happymeet.me' or request.host == 'www.happymeet.me':
+        return redirect('/meet')
+    else:
+        return redirect('/summerfang')
 
-# def index():
-#     if request.host == 'happymeet.me' or request.host == 'www.happymeet.me':
-#         return redirect('/meet')
-#     else:
-#         return redirect('/summerfang')
-
-# @app.route('/api/greeting/<string:name>', methods=['GET'])
-# def greet(name):
-#     return jsonify(greeting=f"Hello, {name}!")
+@app.route('/api/greeting/<string:name>', methods=['GET'])
+def greet(name):
+    return jsonify(greeting=f"Hello, {name}!")
 
 # @app.route('/api/messages', methods=['POST'])
 # def send_message():
