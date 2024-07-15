@@ -27,7 +27,7 @@ socketio = SocketIO(app,cors_allowed_origins="*")
 
 @app.route('/')
 def index():
-    print("Up and running")
+    return "Hello World!"
 
 # def index():
 #     if request.host == 'happymeet.me' or request.host == 'www.happymeet.me':
