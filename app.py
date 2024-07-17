@@ -1,5 +1,6 @@
 
 import os
+import requests
 
 from flask import Flask, redirect, request, jsonify
 from flask_cors import CORS, cross_origin
@@ -101,7 +102,39 @@ def send_allmessages():
 # @cross_origin(origins="*")  # This will allow /sms to be accessed from any domain
 def receive_message():
     print(request.form)
+    # Emit a 'new message' event with the form data
     socketio.emit('new message', request.form)
+
+    # Set the URL for the RESTful call
+    url = "https://www.laplace-innovations.com/api/customers/receive"
+
+    # Set the headers
+    headers = {
+        'accept': 'application/json',
+        'x-api-key': os.getenv('REACT_APP_X_API_KEY'),  # Retrieve the API key from environment variables
+        'Content-Type': 'application/json'
+    }
+
+    # Set the data (payload) for the POST request
+    data = {
+        "receive": {
+            "message": format(request.form['Body']),
+        },
+        "from_to": {
+            "from_phone_number": format(request.form['From']),
+            "to_phone_number": format(request.form['To']),
+        }
+    }
+
+    # Make the POST request
+    response = requests.post(url, json=data, headers=headers)
+
+    # Check the response
+    if response.status_code == 200:
+        print("Success:", response.text)
+    else:
+        print("Error:", response.text)
+    
     return jsonify(success=True)
 
 @app.route('/smserror', methods=['POST'])
